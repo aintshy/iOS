@@ -6,6 +6,7 @@ profile
 DerivedData/
 build/
 xcuserdata
+xcshareddata
 *.moved-aside
 Pods/
 !Podfile.lock

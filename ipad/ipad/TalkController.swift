@@ -41,9 +41,10 @@ class TalkController: UIViewController {
             let dude = talk.human
             let url = NSURL.URLWithString(dude.photo)
             let data = NSData(contentsOfURL : url)
-            self.photo.image = UIImage(data : data)
-            self.talker.text = "\(dude.name) \(dude.sex) \(dude.age)"
-            self.view.setNeedsLayout()
+            dispatch_async(dispatch_get_main_queue()) {
+                self.photo.image = UIImage(data : data)
+                self.talker.text = "\(dude.name) \(dude.sex) \(dude.age)"
+            }
         }
     }
     
