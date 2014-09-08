@@ -27,14 +27,23 @@ class TalkController: UIViewController {
     @IBOutlet var photo : UIImageView!
     @IBOutlet var talker : UILabel!
     
+    var talk : Talk?
+    
     override func viewDidLoad() {
-        super.viewDidLoad();
-        var talk = RtHub().next();
-        var dude = talk.talker();
-        self.talker.text = "\(dude.name()) \(dude.sex()) \(dude.age())";
-        var url = NSURL.URLWithString(dude.photo())
-        var data = NSData(contentsOfURL : url)
-        self.photo.image = UIImage(data : data)
+        super.viewDidLoad()
+        self.reload()
+    }
+    
+    private func reload() {
+        self.talker.text = "wait a sec..."
+        RtHub().next { (talk : Talk) -> Void in
+            self.talk = talk
+            let dude = talk.human
+            let url = NSURL.URLWithString(dude.photo)
+            let data = NSData(contentsOfURL : url)
+            self.photo.image = UIImage(data : data)
+            self.talker.text = "\(dude.name) \(dude.sex) \(dude.age)"
+        }
     }
     
 }

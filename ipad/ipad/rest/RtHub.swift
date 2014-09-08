@@ -19,11 +19,48 @@
 * OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+import UIKit
+
 class RtHub : Hub {
 
-    func next() -> Talk {
-        return RtTalk()
+    var token : String!;
+    
+    convenience init() {
+        self.init(tkn : "5FRMGL0U-9DF7CA16-AD4IOLA2-0K7IERBR-910HU7HA-79NGKP9E-8O94QIQH-B5712TO8-APEM6E97-A94J04IE-9L81Q393-4OEG80H7-E1IF8===");
+    }
+
+    init(tkn : String!) {
+        self.token = tkn;
     }
     
+    func next(callback : ((Talk) -> Void)!) {
+        let url = NSURL(string: "http://i.aintshy.com");
+        let request = NSMutableURLRequest()
+        request.HTTPMethod = "GET"
+        request.URL = url
+        request.setValue("application/xml", forHTTPHeaderField: "Accept")
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+            (data, response, error) in
+            println("loaded \(data.length) bytes of \(response.MIMEType)")
+            let human = Human(
+                name: "Jeff", age: 30, sex: "M",
+                photo: "http://photo.aintshy.com/photo/1"
+            )
+            let messages : [Message] = [Message(text: "How are you", mine: true, date: "today")]
+            let talk = Talk(number: 1, human: human, messages: messages)
+            callback(talk)
+        }
+        task.resume();
+    }
+    
+    func ask(question : String!, callback : (() -> Void)!) {
+        let url = NSURL(string: "http://i.aintshy.com");
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url) {
+            (data, response, error) in
+            callback()
+        }
+        task.resume();
+    }
+
 }
 

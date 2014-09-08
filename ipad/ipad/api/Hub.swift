@@ -20,6 +20,26 @@
 */
 
 protocol Hub : class {
-    func next() -> Talk
+    func next(callback : ((Talk) -> Void)!);
+    func ask(question : String!, callback : (() -> Void)!);
+}
+
+struct Talk {
+    var number : Int
+    var human : Human
+    var messages : [Message]
+}
+
+struct Human {
+    var name : String
+    var age : Int
+    var sex : Character
+    var photo : String
+}
+
+struct Message {
+    var text : String
+    var mine : Bool
+    var date : String
 }
 

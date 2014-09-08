@@ -14,13 +14,7 @@
 		966FCE2B19BE129000DCAA22 /* TalkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966FCE2A19BE129000DCAA22 /* TalkController.swift */; };
 		966FCE2D19BE13D900DCAA22 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966FCE2C19BE13D900DCAA22 /* LoginController.swift */; };
 		966FCE3119BE15A400DCAA22 /* Hub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966FCE3019BE15A400DCAA22 /* Hub.swift */; };
-		966FCE3319BE174400DCAA22 /* Talk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966FCE3219BE174400DCAA22 /* Talk.swift */; };
-		966FCE3519BE17B400DCAA22 /* Human.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966FCE3419BE17B400DCAA22 /* Human.swift */; };
-		966FCE3719BE181500DCAA22 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966FCE3619BE181500DCAA22 /* Message.swift */; };
 		966FCE3919BE1C3300DCAA22 /* RtHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966FCE3819BE1C3300DCAA22 /* RtHub.swift */; };
-		966FCE3B19BE1C9C00DCAA22 /* RtTalk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966FCE3A19BE1C9C00DCAA22 /* RtTalk.swift */; };
-		966FCE3D19BE1CDC00DCAA22 /* RtHuman.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966FCE3C19BE1CDC00DCAA22 /* RtHuman.swift */; };
-		966FCE3F19BE1D4C00DCAA22 /* RtMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966FCE3E19BE1D4C00DCAA22 /* RtMessage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,13 +39,7 @@
 		966FCE2A19BE129000DCAA22 /* TalkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkController.swift; sourceTree = "<group>"; };
 		966FCE2C19BE13D900DCAA22 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		966FCE3019BE15A400DCAA22 /* Hub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Hub.swift; path = api/Hub.swift; sourceTree = "<group>"; };
-		966FCE3219BE174400DCAA22 /* Talk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Talk.swift; path = api/Talk.swift; sourceTree = "<group>"; };
-		966FCE3419BE17B400DCAA22 /* Human.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Human.swift; path = api/Human.swift; sourceTree = "<group>"; };
-		966FCE3619BE181500DCAA22 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = api/Message.swift; sourceTree = "<group>"; };
 		966FCE3819BE1C3300DCAA22 /* RtHub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RtHub.swift; path = rest/RtHub.swift; sourceTree = "<group>"; };
-		966FCE3A19BE1C9C00DCAA22 /* RtTalk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RtTalk.swift; path = rest/RtTalk.swift; sourceTree = "<group>"; };
-		966FCE3C19BE1CDC00DCAA22 /* RtHuman.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RtHuman.swift; path = rest/RtHuman.swift; sourceTree = "<group>"; };
-		966FCE3E19BE1D4C00DCAA22 /* RtMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RtMessage.swift; path = rest/RtMessage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,13 +88,7 @@
 				966FCE2A19BE129000DCAA22 /* TalkController.swift */,
 				966FCE2C19BE13D900DCAA22 /* LoginController.swift */,
 				966FCE3019BE15A400DCAA22 /* Hub.swift */,
-				966FCE3219BE174400DCAA22 /* Talk.swift */,
-				966FCE3419BE17B400DCAA22 /* Human.swift */,
-				966FCE3619BE181500DCAA22 /* Message.swift */,
 				966FCE3819BE1C3300DCAA22 /* RtHub.swift */,
-				966FCE3A19BE1C9C00DCAA22 /* RtTalk.swift */,
-				966FCE3C19BE1CDC00DCAA22 /* RtHuman.swift */,
-				966FCE3E19BE1D4C00DCAA22 /* RtMessage.swift */,
 			);
 			path = ipad;
 			sourceTree = "<group>";
@@ -236,16 +218,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				966FCE2D19BE13D900DCAA22 /* LoginController.swift in Sources */,
-				966FCE3F19BE1D4C00DCAA22 /* RtMessage.swift in Sources */,
-				966FCE3519BE17B400DCAA22 /* Human.swift in Sources */,
 				966FCE2B19BE129000DCAA22 /* TalkController.swift in Sources */,
 				966FCE3919BE1C3300DCAA22 /* RtHub.swift in Sources */,
 				966FCE0E19BDFCAC00DCAA22 /* AppDelegate.swift in Sources */,
-				966FCE3319BE174400DCAA22 /* Talk.swift in Sources */,
 				966FCE3119BE15A400DCAA22 /* Hub.swift in Sources */,
-				966FCE3D19BE1CDC00DCAA22 /* RtHuman.swift in Sources */,
-				966FCE3B19BE1C9C00DCAA22 /* RtTalk.swift in Sources */,
-				966FCE3719BE181500DCAA22 /* Message.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
