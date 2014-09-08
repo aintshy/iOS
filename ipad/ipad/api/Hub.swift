@@ -33,7 +33,7 @@ struct Talk {
 struct Human {
     var name : String
     var age : Int
-    var sex : Character
+    var sex : String
     var photo : String
 }
 

@@ -34,20 +34,19 @@ class RtHub : Hub {
     }
     
     func next(callback : ((Talk) -> Void)!) {
-        let url = NSURL(string: "http://i.aintshy.com");
+        let url = NSURL(string: "http://i.aintshy.com/58");
         let request = NSMutableURLRequest()
         request.HTTPMethod = "GET"
         request.URL = url
+        request.setValue("iOS app", forHTTPHeaderField: "User-Agent")
         request.setValue("application/xml", forHTTPHeaderField: "Accept")
+        request.setValue("Rexsl-Auth=\(self.token)", forHTTPHeaderField: "Cookie")
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
             (data, response, error) in
             println("loaded \(data.length) bytes of \(response.MIMEType)")
-            let human = Human(
-                name: "Jeff", age: 30, sex: "M",
-                photo: "http://photo.aintshy.com/photo/1.png"
-            )
+            let doc = CXMLDocument(data: NSData(data: data), options: 0, error: nil)
             let messages : [Message] = [Message(text: "How are you", mine: true, date: "today")]
-            let talk = Talk(number: 1, human: human, messages: messages)
+            let talk = Talk(number: 1, human: self.human(doc), messages: messages)
             callback(talk)
         }
         task.resume();
@@ -62,5 +61,16 @@ class RtHub : Hub {
         task.resume();
     }
 
+    // Fetch Human from XML
+    func human(doc : CXMLDocument) -> Human {
+        let role = doc.nodeForXPath("/page/role", error: nil)
+        return Human(
+            name: role.nodeForXPath("name/text()", error: nil).stringValue(),
+            age: role.nodeForXPath("age/text()", error: nil).stringValue().toInt()!,
+            sex: role.nodeForXPath("sex/text()", error: nil).stringValue(),
+            photo: role.nodeForXPath("links/link[@rel='photo']/@href", error: nil).stringValue()
+        )
+    }
+    
 }
 
