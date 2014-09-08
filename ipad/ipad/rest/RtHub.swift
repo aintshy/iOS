@@ -44,7 +44,7 @@ class RtHub : Hub {
             println("loaded \(data.length) bytes of \(response.MIMEType)")
             let human = Human(
                 name: "Jeff", age: 30, sex: "M",
-                photo: "http://photo.aintshy.com/photo/1"
+                photo: "http://photo.aintshy.com/photo/1.png"
             )
             let messages : [Message] = [Message(text: "How are you", mine: true, date: "today")]
             let talk = Talk(number: 1, human: human, messages: messages)
