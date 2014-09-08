@@ -1,2 +1,2 @@
 language: objective-c
-xcode_project: ipad/ipad.xcodeproj
+xcode_workspace: aintshy.xcworkspace
