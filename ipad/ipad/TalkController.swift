@@ -21,7 +21,7 @@
 
 import UIKit
 
-class TalkController: UIViewController {
+class TalkController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var answer : UITextField!
     @IBOutlet var photo : UIImageView!
@@ -51,5 +51,23 @@ class TalkController: UIViewController {
         self.talker.text = "\(dude.name) \(dude.sex) \(dude.age)"
     }
     
+    func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
+        return 1
+    }
+
+    func tableView(view: UITableView!, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(view: UITableView!, cellForRowAtIndexPath path: NSIndexPath!) -> UITableViewCell! {
+        let id = "main"
+        var cell = view.dequeueReusableCellWithIdentifier(id, forIndexPath: path) as UITableViewCell
+        if (cell == nil) {
+            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: id)
+        }
+        cell.textLabel.text = "how ar eyou?"
+        return cell
+    }
+
 }
 
