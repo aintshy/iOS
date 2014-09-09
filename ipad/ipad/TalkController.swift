@@ -49,6 +49,7 @@ class TalkController : UIViewController, UITableViewDelegate, UITableViewDataSou
         let dude = talk.human
         self.photo.image = UIImage(data : dude.photo)
         self.talker.text = "\(dude.name) \(dude.sex) \(dude.age)"
+        self.table.reloadData()
     }
     
     func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
@@ -56,7 +57,13 @@ class TalkController : UIViewController, UITableViewDelegate, UITableViewDataSou
     }
 
     func tableView(view: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        var count : Int
+        if self.talk == nil {
+            count = 0
+        } else {
+            count = self.talk!.messages.count
+        }
+        return count
     }
     
     func tableView(view: UITableView!, cellForRowAtIndexPath path: NSIndexPath!) -> UITableViewCell! {
@@ -65,7 +72,7 @@ class TalkController : UIViewController, UITableViewDelegate, UITableViewDataSou
         if (cell == nil) {
             cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: id)
         }
-        cell.textLabel.text = "how ar eyou?"
+        cell.textLabel.text = self.talk!.messages[path.item].text
         return cell
     }
 
