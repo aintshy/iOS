@@ -25,10 +25,13 @@
                                     <constraint firstAttribute="width" constant="200" id="yri-ra-bb8"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y2W-TT-rdK">
-                                <rect key="frame" x="112" y="285" width="377" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="your answer..." clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y2W-TT-rdK">
+                                <rect key="frame" x="112" y="285" width="376" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="send" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vkP-fr-lcX" id="Tg0-5z-9N8"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="???" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZI6-Mf-AaR">
                                 <rect key="frame" x="147" y="245" width="307" height="21"/>
@@ -36,7 +39,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="vG1-eq-p5J">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="vG1-eq-p5J">
                                 <rect key="frame" x="144" y="323" width="313" height="282"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -61,14 +64,19 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.82081074617346939" green="0.82081074617346939" blue="0.82081074617346939" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="ZI6-Mf-AaR" secondAttribute="centerX" id="PFa-o1-Lm3"/>
                             <constraint firstAttribute="centerX" secondItem="EdA-ls-cdl" secondAttribute="centerX" id="QpN-vh-tpa"/>
                             <constraint firstItem="y2W-TT-rdK" firstAttribute="centerX" secondItem="EdA-ls-cdl" secondAttribute="centerX" id="eUs-MW-lrF"/>
+                            <constraint firstAttribute="centerX" secondItem="vG1-eq-p5J" secondAttribute="centerX" id="jcA-nY-go1"/>
                             <constraint firstAttribute="centerX" secondItem="y2W-TT-rdK" secondAttribute="centerX" id="k7A-yp-Zii"/>
                             <constraint firstItem="y2W-TT-rdK" firstAttribute="centerX" secondItem="ZI6-Mf-AaR" secondAttribute="centerX" id="y0v-NC-GWb"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="wO7-1f-C5W" appends="YES" id="kz3-qp-yBG"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="answer" destination="y2W-TT-rdK" id="sKj-A6-t9z"/>
@@ -78,6 +86,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fW5-cO-pzu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="wO7-1f-C5W">
+                    <connections>
+                        <action selector="viewTapped:" destination="vkP-fr-lcX" id="UDY-UP-U34"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
         </scene>
         <!--Login Controller-->
@@ -106,7 +119,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5C9-nq-Fvi">
                                 <rect key="frame" x="252" y="159" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

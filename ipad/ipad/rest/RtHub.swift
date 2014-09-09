@@ -34,17 +34,16 @@ class RtHub : Hub {
     }
     
     func next(callback : ((Talk) -> Void)!) {
-        let url = NSURL(string: "http://i.aintshy.com/58");
         let request = NSMutableURLRequest()
         request.HTTPMethod = "GET"
-        request.URL = url
+        request.URL = NSURL(string: "http://i.aintshy.com/58")
         request.setValue("iOS app", forHTTPHeaderField: "User-Agent")
         request.setValue("application/xml", forHTTPHeaderField: "Accept")
         request.setValue("Rexsl-Auth=\(self.token)", forHTTPHeaderField: "Cookie")
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
             (data, response, error) in
             println("loaded \(data.length) bytes of \(response.MIMEType)")
-            let doc = CXMLDocument(data: NSData(data: data), options: 0, error: nil)
+            let doc = CXMLDocument(data: data, options: 0, error: nil)
             let page = doc.nodeForXPath("/page", error: nil)
             let talk = Talk(
                 number: page.nodeForXPath("talk/number/text()", error: nil).stringValue().toInt()!,
@@ -56,6 +55,22 @@ class RtHub : Hub {
         task.resume();
     }
     
+    func answer(talk: Int!, text: String!, callback: (() -> Void)!) {
+        let request = NSMutableURLRequest()
+        request.HTTPMethod = "POST"
+        let encoded = text.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
+        request.HTTPBody = "text=\(encoded)".dataUsingEncoding(NSUTF8StringEncoding)
+        request.URL = NSURL(string: "http://i.aintshy.com/\(talk)/post")
+        request.setValue("iOS app", forHTTPHeaderField: "User-Agent")
+        request.setValue("Rexsl-Auth=\(self.token)", forHTTPHeaderField: "Cookie")
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+            (data, response, error) in
+            println("posted an answer to talk #\(talk)")
+            callback()
+        }
+        task.resume();
+    }
+
     func ask(question : String!, callback : (() -> Void)!) {
         let url = NSURL(string: "http://i.aintshy.com");
         let task = NSURLSession.sharedSession().dataTaskWithURL(url) {

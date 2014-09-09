@@ -21,7 +21,7 @@
 
 import UIKit
 
-class TalkController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TalkController : UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     @IBOutlet var answer : UITextField!
     @IBOutlet var photo : UIImageView!
@@ -35,21 +35,20 @@ class TalkController : UIViewController, UITableViewDelegate, UITableViewDataSou
         self.reload()
     }
     
-    private func reload() {
-        self.talker.text = "wait a sec..."
-        RtHub().next { (talk : Talk) -> Void in
-            dispatch_async(dispatch_get_main_queue()) {
-                self.update(talk)
-            }
-        }
+    @IBAction func viewTapped(sender : AnyObject) {
+        self.answer.resignFirstResponder()
     }
     
-    private func update(talk : Talk!) {
-        self.talk = talk
-        let dude = talk.human
-        self.photo.image = UIImage(data : dude.photo)
-        self.talker.text = "\(dude.name) \(dude.sex) \(dude.age)"
-        self.table.reloadData()
+    func textFieldShouldReturn(field: UITextField!) -> Bool {
+        if (field == self.answer) {
+            self.answer.resignFirstResponder()
+            let text = self.answer.text as String
+            RtHub().answer(self.talk!.number, text: text) { () -> Void in
+                self.reload()
+            }
+            return false
+        }
+        return true
     }
     
     func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
@@ -77,5 +76,22 @@ class TalkController : UIViewController, UITableViewDelegate, UITableViewDataSou
         return cell
     }
 
+    private func reload() {
+        self.talker.text = "wait a sec..."
+        RtHub().next { (talk : Talk) -> Void in
+            dispatch_async(dispatch_get_main_queue()) {
+                self.update(talk)
+            }
+        }
+    }
+    
+    private func update(talk : Talk!) {
+        self.talk = talk
+        let dude = talk.human
+        self.photo.image = UIImage(data : dude.photo)
+        self.talker.text = "\(dude.name) \(dude.sex) \(dude.age)"
+        self.table.reloadData()
+    }
+    
 }
 

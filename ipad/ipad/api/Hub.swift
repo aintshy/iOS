@@ -24,6 +24,7 @@ import UIKit
 protocol Hub : class {
     func next(callback : ((Talk) -> Void)!);
     func ask(question : String!, callback : (() -> Void)!);
+    func answer(talk : Int!, text : String!, callback : (() -> Void)!);
 }
 
 struct Talk {
