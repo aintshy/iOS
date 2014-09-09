@@ -45,8 +45,11 @@ class RtHub : Hub {
             (data, response, error) in
             println("loaded \(data.length) bytes of \(response.MIMEType)")
             let doc = CXMLDocument(data: NSData(data: data), options: 0, error: nil)
-            let messages : [Message] = [Message(text: "How are you", mine: true, date: "today")]
-            let talk = Talk(number: 1, human: self.human(doc), messages: messages)
+            let talk = Talk(
+                number: doc.nodeForXPath("/page/talk/number/text()", error: nil).stringValue().toInt()!,
+                human: self.human(doc),
+                messages: self.messages(doc)
+            )
             callback(talk)
         }
         task.resume();
@@ -61,15 +64,23 @@ class RtHub : Hub {
         task.resume();
     }
 
-    // Fetch Human from XML
     func human(doc : CXMLDocument) -> Human {
         let role = doc.nodeForXPath("/page/role", error: nil)
+        let photo = role.nodeForXPath("links/link[@rel='photo']/@href", error: nil).stringValue()
+        let url = NSURL.URLWithString(photo)
+        let data = NSData(contentsOfURL : url)
         return Human(
             name: role.nodeForXPath("name/text()", error: nil).stringValue(),
             age: role.nodeForXPath("age/text()", error: nil).stringValue().toInt()!,
             sex: role.nodeForXPath("sex/text()", error: nil).stringValue(),
-            photo: role.nodeForXPath("links/link[@rel='photo']/@href", error: nil).stringValue()
+            photo: data
         )
+    }
+    
+    func messages(doc : CXMLDocument) -> [Message] {
+        var array : [Message] = []
+        array.append(Message(text: "How are you", mine: true, date: "today"))
+        return array
     }
     
 }

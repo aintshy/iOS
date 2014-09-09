@@ -19,6 +19,8 @@
 * OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+import UIKit
+
 protocol Hub : class {
     func next(callback : ((Talk) -> Void)!);
     func ask(question : String!, callback : (() -> Void)!);
@@ -34,7 +36,7 @@ struct Human {
     var name : String
     var age : Int
     var sex : String
-    var photo : String
+    var photo : NSData
 }
 
 struct Message {

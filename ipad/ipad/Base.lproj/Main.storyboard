@@ -17,6 +17,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EdA-ls-cdl">
+                                <rect key="frame" x="200" y="28" width="200" height="200"/>
+                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="rhg-8S-vpl"/>
+                                    <constraint firstAttribute="width" constant="200" id="yri-ra-bb8"/>
+                                </constraints>
+                            </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y2W-TT-rdK">
                                 <rect key="frame" x="112" y="285" width="377" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -28,14 +36,10 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EdA-ls-cdl">
-                                <rect key="frame" x="200" y="28" width="200" height="200"/>
-                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="rhg-8S-vpl"/>
-                                    <constraint firstAttribute="width" constant="200" id="yri-ra-bb8"/>
-                                </constraints>
-                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="vG1-eq-p5J">
+                                <rect key="frame" x="144" y="323" width="313" height="282"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.82081074617346939" green="0.82081074617346939" blue="0.82081074617346939" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -49,6 +53,7 @@
                     <connections>
                         <outlet property="answer" destination="y2W-TT-rdK" id="sKj-A6-t9z"/>
                         <outlet property="photo" destination="EdA-ls-cdl" id="dRI-Ug-KnF"/>
+                        <outlet property="table" destination="vG1-eq-p5J" id="uWo-2d-38M"/>
                         <outlet property="talker" destination="ZI6-Mf-AaR" id="NDf-2D-7im"/>
                     </connections>
                 </viewController>
