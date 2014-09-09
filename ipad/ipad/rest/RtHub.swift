@@ -45,10 +45,11 @@ class RtHub : Hub {
             (data, response, error) in
             println("loaded \(data.length) bytes of \(response.MIMEType)")
             let doc = CXMLDocument(data: NSData(data: data), options: 0, error: nil)
+            let page = doc.nodeForXPath("/page", error: nil)
             let talk = Talk(
-                number: doc.nodeForXPath("/page/talk/number/text()", error: nil).stringValue().toInt()!,
-                human: self.human(doc),
-                messages: self.messages(doc)
+                number: page.nodeForXPath("talk/number/text()", error: nil).stringValue().toInt()!,
+                human: self.human(page),
+                messages: self.messages(page)
             )
             callback(talk)
         }
@@ -64,8 +65,8 @@ class RtHub : Hub {
         task.resume();
     }
 
-    func human(doc : CXMLDocument) -> Human {
-        let role = doc.nodeForXPath("/page/role", error: nil)
+    func human(page : CXMLNode) -> Human {
+        let role = page.nodeForXPath("role", error: nil)
         let photo = role.nodeForXPath("links/link[@rel='photo']/@href", error: nil).stringValue()
         let url = NSURL.URLWithString(photo)
         let data = NSData(contentsOfURL : url)
@@ -77,9 +78,25 @@ class RtHub : Hub {
         )
     }
     
-    func messages(doc : CXMLDocument) -> [Message] {
+    func messages(page : CXMLNode) -> [Message] {
         var array : [Message] = []
-        array.append(Message(text: "How are you", mine: true, date: "today"))
+        let asking = page.nodeForXPath("role/asking", error: nil).stringValue()
+        for msg in page.nodesForXPath("messages/message", error: nil) {
+            array.append(
+                Message(
+                    text: msg.nodeForXPath("text/text()", error: nil).stringValue(),
+                    mine: msg.nodeForXPath("asking/text()", error: nil).stringValue() == asking,
+                    date: "today"
+                )
+            )
+        }
+        array.append(
+            Message(
+                text: page.nodeForXPath("talk/question/text()", error: nil).stringValue(),
+                mine: asking == "false",
+                date: "?"
+            )
+        )
         return array
     }
     

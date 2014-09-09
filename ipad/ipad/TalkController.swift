@@ -67,12 +67,13 @@ class TalkController : UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(view: UITableView!, cellForRowAtIndexPath path: NSIndexPath!) -> UITableViewCell! {
-        let id = "main"
-        var cell = view.dequeueReusableCellWithIdentifier(id, forIndexPath: path) as UITableViewCell
+        let msg = self.talk!.messages[path.item]
+        let identifier = msg.mine ? "mine" : "his"
+        var cell = view.dequeueReusableCellWithIdentifier(identifier, forIndexPath: path) as UITableViewCell
         if (cell == nil) {
-            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: id)
+            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: identifier)
         }
-        cell.textLabel.text = self.talk!.messages[path.item].text
+        cell.textLabel.text = msg.text
         return cell
     }
 
